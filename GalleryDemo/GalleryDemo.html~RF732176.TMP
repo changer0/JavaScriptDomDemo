@@ -22,8 +22,8 @@
 	<p id="description">描述</p>
 	<img id="placeholder" src=""/>
 
-	<script type="text/javascript" src="gallery.js">
-
+	<script type="text/javascript">
+		console.log("这是一个测试")
 		
 	</script>
 </body>

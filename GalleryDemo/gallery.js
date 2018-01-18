@@ -1,16 +1,20 @@
 function prepareGallery() {
+   
+	if (!document.getElementById || !document.getElementsByTagName) {
 
-	if (!document.getElementById || !document.getElementByTagName) {
 		return false;
 	}
 	var imagegallery =  document.getElementById("imagegallery");
 	if (!imagegallery) {
 		return false;
 	}
-	var links = imagegallery.getElementByTagName("a");
+	var links = imagegallery.getElementsByTagName("a");
 	for (var i = 0; i < links.length; i++) {
-		links[i].onclick = function {
-			return showPic(this) ? false : true;
+		console.log("link"+i+links[i].firstChild.nodeValue);
+		links[i].onclick = function() {
+			var ret = showPic(this);
+			console.log("showPic的返回值:"+ret);
+			return ret ? false : true;
 		}
 	}
 }
@@ -28,15 +32,16 @@ function showPic(whichpic) {
 	var description = document.getElementById("description");
 	if (description) {
 		var text = whichpic.getAttribute("title") ? whichpic.getAttribute("title") : "";
-		if (description.first-child.nodeType == 3) {
-			description.first-child.nodeValue = text;
+		if (description.firstChild.nodeType == 3) {
+			description.firstChild.nodeValue = text;
 		}
 	}
 	return true;
 }
 
 window.onload = function() {
-	addLoadEvent(prepareGallery);
+	prepareGallery();
+	//console.log("这是一个测试");
 }
 
 
@@ -46,7 +51,7 @@ function addLoadEvent(func) {
 	if (typeof window.onload != "function") {
 		window.onload = func;
 	} else {
-		window.onload = function {
+		window.onload = function() {
 			oldonload();
 			func();
 		}
